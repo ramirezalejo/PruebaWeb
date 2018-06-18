@@ -1,0 +1,76 @@
+﻿@model PruebaWeb.Models.IndexModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <h3>Select Data Storage:</h3>
+        <div class="form-group">
+
+            @Html.DropDownListFor(p => p.IdDataStorageSelected, new SelectList(Model.DataStorageList, "Id", "Connecion.TypeConnection"),
+            new { @class = "form-control input-lg" })
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <fieldset>
+            <legend>Product:</legend>
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(p => p.ProductSelected.Code)</label>
+                @Html.EditorFor(p => p.ProductSelected.Code, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="form-group">
+
+                <label class="control-label">@Html.DisplayNameFor(p => p.ProductSelected.IdCategory)</label>
+                @Html.DropDownListFor(p => p.ProductSelected.IdCategory, new SelectList(Model.CategoriesList, "Id", "Name"),
+                    new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(p => p.ProductSelected.Name)</label>
+                @Html.EditorFor(p => p.ProductSelected.Name, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(p => p.ProductSelected.Price)</label>
+                @Html.EditorFor(p => p.ProductSelected.Price, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(p => p.ProductSelected.Amount)</label>
+                @Html.EditorFor(p => p.ProductSelected.Amount, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </fieldset>
+        <button class="btn btn-default" type="submit">
+            <i class="glyphicon glyphicon-floppy-save"> Save</i>
+        </button>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Id Category</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ProductsList)
+                    {
+                        <tr>
+                            <td>@item.Code</td>
+                            <td>@item.IdCategory</td>
+                            <td>@item.Name</td>
+                            <td>@item.Price</td>
+                            <td>@item.Amount</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
